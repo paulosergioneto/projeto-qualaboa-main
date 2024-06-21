@@ -87,6 +87,8 @@
                 alert("Por favor, insira um CPF válido.");
                 return false;
             }
+            // Redirecionar para a página principal após login bem-sucedido
+            window.location.href = 'index.html';
             return true;
         }
 
@@ -125,15 +127,21 @@
                 alert("As senhas não coincidem.");
                 return false;
             }
-            document.querySelector('.form-registro').addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio do formulário
-            if (validarFormularioRegistro()) {
-             alert('Registro realizado com sucesso!');
-             // Aqui você pode adicionar o código para lidar com os dados do formulário, como enviá-los via AJAX.
-    }
-});
 
+            // Redirecionar para a página principal após registro bem-sucedido
+            alert('Registro realizado com sucesso!');
+            window.location.href = 'index.html';
+            return true;
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.form-registro').addEventListener('submit', function(event) {
+                event.preventDefault(); // Impede o envio do formulário
+                if (validarFormularioRegistro()) {
+                    // Lidar com os dados do formulário
+                }
+            });
+        });
     </script>
 </head>
 <body>
@@ -148,17 +156,6 @@
             <div class="menu">
                 <nav>
                     <a href="index.html">Home</a>
-                    <div class="dropdown">
-                        <a href="#" class="dropbtn">Categorias</a>
-                        <div class="dropdown-content">
-                            <a href="#">Shows</a>
-                            <a href="#">Cinema</a>
-                            <a href="#">Teatro</a>
-                            <a href="#">Museu</a>
-                        </div>
-                    </div>
-                    <a href="#eventos-salvos">Eventos Salvos</a>
-                    <a href="#contato">Contato</a>
                 </nav>
             </div>
             <div class="social">
@@ -186,62 +183,58 @@
       </script>
       
 
-    <section id="formulario" class="form-section">
-        <div class="container">
-            <div class="form-container">
-                <div class="form-box">
-                    <h2>Login</h2>
-                    <form onsubmit="return validarFormularioLogin()" class="form-login" method="get">
-                        <div class="form-group">
-                            <label for="cpfLogin">CPF:</label>
-                            <input type="text" id="cpfLogin" name="cpf" class="form-control" required oninput="formatCPF(this)" maxlength="14">
-                        </div>
-                        <div class="form-group">
-                            <label for="senha">Senha:</label>
-                            <input type="password" id="senha" name="senha" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Entrar</button>
-                    </form>
-                </div>
-
-                <div class="form-box">
-                    <h2>Registro</h2>
-                    <form onsubmit="return validarFormularioRegistro()" class="form-registro" method="get">
-                        <div class="form-group">
-                            <label for="email">E-mail:</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="nome">Nome:</label>
-                            <input type="text" id="nome" name="nome" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="celular">Celular:</label>
-                            <input type="text" id="celular" name="celular" class="form-control" required oninput="formatCelular(this)" maxlength="15">
-                        </div>
-                        <div class="form-group">
-                            <label for="dataNascimento">Data de Nascimento:</label>
-                            <input type="date" id="dataNascimento" name="dataNascimento" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cpf">CPF:</label>
-                            <input type="text" id="cpf" name="cpf" class="form-control" required oninput="formatCPF(this)" maxlength="14">
-                        </div>
-                        <div class="form-group">
-                            <label for="senhaRegistro">Senha:</label>
-                            <input type="password" id="senhaRegistro" name="senhaRegistro" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirmarSenha">Confirmar Senha:</label>
-                            <input type="password" id="confirmarSenha" name="confirmarSenha" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary" href="index.html">Registrar</button>
-                    </form>
-                </div>
+      <section class="form-section">
+        <div class="container form-container">
+            <div class="form-box">
+                <h2>Login</h2>
+                <form class="form-login" onsubmit="return validarFormularioLogin()">
+                    <div class="form-group">
+                        <label for="cpfLogin">CPF:</label>
+                        <input type="text" id="cpfLogin" oninput="formatCPF(this)" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha:</label>
+                        <input type="password" id="senha" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                </form>
+            </div>
+            <div class="form-box">
+                <h2>Registrar</h2>
+                <form class="form-registro" onsubmit="return validarFormularioRegistro()">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nome">Nome Completo:</label>
+                        <input type="text" id="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="celular">Celular:</label>
+                        <input type="text" id="celular" oninput="formatCelular(this)" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataNascimento">Data de Nascimento:</label>
+                        <input type="date" id="dataNascimento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cpf">CPF:</label>
+                        <input type="text" id="cpf" oninput="formatCPF(this)" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senhaRegistro">Senha:</label>
+                        <input type="password" id="senhaRegistro" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmarSenha">Confirmar Senha:</label>
+                        <input type="password" id="confirmarSenha" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </form>
             </div>
         </div>
     </section>
-
     <footer>
         <div class="container">
             <p>&copy; 2024 Qual a Boa? Todos os direitos reservados.</p>
